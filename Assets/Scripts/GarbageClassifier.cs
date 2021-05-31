@@ -28,7 +28,6 @@ public class GarbageClassifier : MonoBehaviour
     {
         AnimateCamera();
         UpdateCursorPosition();
-        GrabGarbage();
     }
 
     void AnimateCamera()
@@ -58,10 +57,5 @@ public class GarbageClassifier : MonoBehaviour
         } else {
             cursorImage.GetComponent<Image>().sprite = openedHandSprite;
         }
-    }
-
-    void GrabGarbage()
-    {
-        
     }
 }
