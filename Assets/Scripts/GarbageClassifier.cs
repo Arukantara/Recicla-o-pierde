@@ -13,6 +13,10 @@ public class GarbageClassifier : MonoBehaviour
     [SerializeField] float movementSpeed = 0.5f;
     [SerializeField] Sprite openedHandSprite;
     [SerializeField] Sprite closedHandSprite;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem failParticles;
+    [SerializeField] AudioSource successSound;
+    [SerializeField] AudioSource failSound;
     private Vector3 currentAngle;
     private Vector3 currentPosition;
 
@@ -56,6 +60,40 @@ public class GarbageClassifier : MonoBehaviour
             cursorImage.GetComponent<Image>().sprite = closedHandSprite;
         } else {
             cursorImage.GetComponent<Image>().sprite = openedHandSprite;
+        }
+    }
+
+    public void CountSuccess(GameObject bin)
+    {
+        PlayParticles(bin, successParticles);
+        PlaySound(successSound);
+    }
+
+    public void CountPartialSuccess(GameObject bin)
+    {
+        PlayParticles(bin, successParticles);
+        PlaySound(successSound);
+    }
+
+    public void CountFail(GameObject bin)
+    {
+        PlayParticles(bin, failParticles);
+        PlaySound(failSound);
+    }
+
+    private void PlayParticles(GameObject bin, ParticleSystem particles)
+    {
+        if(particles) {
+            particles.transform.position = bin.transform.position;
+            particles.transform.Translate(new Vector3(0, 0, 1f));
+            particles.Play();
+        }
+    }
+
+    private void PlaySound(AudioSource sound)
+    {
+        if(sound) {
+            sound.PlayOneShot(sound.clip);
         }
     }
 }

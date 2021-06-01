@@ -7,16 +7,11 @@ public class GarbageGrabber : MonoBehaviour
     [SerializeField] Camera mainCamera;
     bool grabbed = false;
     Rigidbody rigidBody;
-    [SerializeField] string validBin1;
-    [SerializeField] string validBin2;
-
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         GrabGarbage();
@@ -43,6 +38,7 @@ public class GarbageGrabber : MonoBehaviour
         if (Input.GetMouseButtonUp(0)) {
             grabbed = false;
             rigidBody.useGravity = true;
+            // TODO on collision, evaluate touched bin and act depending on that.
         }
     }
 
