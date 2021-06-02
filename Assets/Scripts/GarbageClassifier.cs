@@ -17,8 +17,15 @@ public class GarbageClassifier : MonoBehaviour
     [SerializeField] ParticleSystem failParticles;
     [SerializeField] AudioSource successSound;
     [SerializeField] AudioSource failSound;
+    [SerializeField] Text scoreText;
+    [SerializeField] Text timerText;
     private Vector3 currentAngle;
     private Vector3 currentPosition;
+    private int score = 0;
+    const int MAX_SCORE = 5000;
+    const int SUCCESS_SCORE = 100;
+    const int HALF_SUCCESS_SCORE = 50;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +74,17 @@ public class GarbageClassifier : MonoBehaviour
     {
         PlayParticles(bin, successParticles);
         PlaySound(successSound);
+        score += SUCCESS_SCORE;
+        UpdateScore();
     }
 
     public void CountPartialSuccess(GameObject bin)
     {
         PlayParticles(bin, successParticles);
         PlaySound(successSound);
+        score += HALF_SUCCESS_SCORE;
+        UpdateScore();
+
     }
 
     public void CountFail(GameObject bin)
@@ -95,5 +107,10 @@ public class GarbageClassifier : MonoBehaviour
         if(sound) {
             sound.PlayOneShot(sound.clip);
         }
+    }
+
+    private void UpdateScore()
+    {
+        scoreText.text = score.ToString();
     }
 }
