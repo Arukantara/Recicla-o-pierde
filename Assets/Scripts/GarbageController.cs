@@ -14,7 +14,7 @@ public class GarbageController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         GameObject classifierObject = GameObject.Find("GarbageClassifier");
         if(classifierObject) {
-        classifier = GameObject.Find("GarbageClassifier").GetComponent<GarbageClassifier>();
+            classifier = GameObject.Find("GarbageClassifier").GetComponent<GarbageClassifier>();
         }
     }
 

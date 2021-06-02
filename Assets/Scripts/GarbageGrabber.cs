@@ -9,7 +9,6 @@ public class GarbageGrabber : MonoBehaviour
     Rigidbody rigidBody;
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -27,6 +26,7 @@ public class GarbageGrabber : MonoBehaviour
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Garbage") {
                 grabbed = true;
                 Transform objectHit = hit.transform;
+                rigidBody = hit.rigidbody;
                 
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 newPosition = new Vector3(mousePosition.x, mousePosition.y, objectHit.position.z);
@@ -35,10 +35,9 @@ public class GarbageGrabber : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetMouseButtonUp(0) && rigidBody) {
             grabbed = false;
             rigidBody.useGravity = true;
-            // TODO on collision, evaluate touched bin and act depending on that.
         }
     }
 
