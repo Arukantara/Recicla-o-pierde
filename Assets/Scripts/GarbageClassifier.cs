@@ -19,6 +19,7 @@ public class GarbageClassifier : MonoBehaviour
     [SerializeField] AudioSource failSound;
     [SerializeField] Text scoreText;
     [SerializeField] Text timerText;
+    [SerializeField] GameObject[] garbageOptions;
     private Vector3 currentAngle;
     private Vector3 currentPosition;
     private int score = 0;
@@ -76,6 +77,7 @@ public class GarbageClassifier : MonoBehaviour
         PlaySound(successSound);
         score += SUCCESS_SCORE;
         UpdateScore();
+        LoadGarbage();
     }
 
     public void CountPartialSuccess(GameObject bin)
@@ -84,13 +86,14 @@ public class GarbageClassifier : MonoBehaviour
         PlaySound(successSound);
         score += HALF_SUCCESS_SCORE;
         UpdateScore();
-
+        LoadGarbage();
     }
 
     public void CountFail(GameObject bin)
     {
         PlayParticles(bin, failParticles);
         PlaySound(failSound);
+        LoadGarbage();
     }
 
     private void PlayParticles(GameObject bin, ParticleSystem particles)
@@ -112,5 +115,11 @@ public class GarbageClassifier : MonoBehaviour
     private void UpdateScore()
     {
         scoreText.text = score.ToString();
+    }
+
+    private void LoadGarbage()
+    {
+        int randomIndex = Random.Range(0, garbageOptions.Length);
+        Instantiate(garbageOptions[randomIndex], new Vector3(2.42f, 1.09f, -1.29f), Quaternion.identity);
     }
 }

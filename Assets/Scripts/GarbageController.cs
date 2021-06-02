@@ -24,7 +24,6 @@ public class GarbageController : MonoBehaviour
             return;
         }
         
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.name == validBin1) {
             classifier.CountSuccess(collision.gameObject);
         } else if (collision.gameObject.name == validBin2) {
@@ -32,5 +31,6 @@ public class GarbageController : MonoBehaviour
         } else {
             classifier.CountFail(collision.gameObject);
         }
+        Destroy(gameObject);
     }
 }
