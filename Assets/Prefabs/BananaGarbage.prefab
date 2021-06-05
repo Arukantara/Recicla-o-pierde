@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   validBin1: Restos
-  validBin2: Envases
+  validBin2: 
 --- !u!1001 &865555007511256738
 PrefabInstance:
   m_ObjectHideFlags: 0
