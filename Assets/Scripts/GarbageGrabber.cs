@@ -6,7 +6,8 @@ public class GarbageGrabber : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     bool grabbed = false;
-    Rigidbody rigidBody;
+    Rigidbody garbageRigidBody;
+    Transform garbageTransform;
     void Start()
     {
     }
@@ -25,19 +26,14 @@ public class GarbageGrabber : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Garbage") {
                 grabbed = true;
-                Transform objectHit = hit.transform;
-                rigidBody = hit.rigidbody;
-                
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 newPosition = new Vector3(mousePosition.x, mousePosition.y, objectHit.position.z);
-                objectHit.position = Vector2.Lerp(objectHit.position, newPosition, 1f);
-                Debug.Log(objectHit.position);
+                garbageRigidBody = hit.rigidbody;
+                garbageTransform = hit.transform;
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && rigidBody) {
+        if (Input.GetMouseButtonUp(0) && garbageRigidBody) {
             grabbed = false;
-            rigidBody.useGravity = true;
+            garbageRigidBody.useGravity = true;
         }
     }
 
@@ -51,7 +47,7 @@ public class GarbageGrabber : MonoBehaviour
                 Transform objectHit = hit.transform;
                 
                 Vector3 newPosition = new Vector3(objectHit.position.x, 1.329f, objectHit.position.z);
-                transform.position = Vector2.Lerp(transform.position, newPosition, 1f);
+                garbageTransform.position = Vector2.Lerp(transform.position, newPosition, 1f);
             }
         }
     }
