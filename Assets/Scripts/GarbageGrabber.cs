@@ -34,6 +34,8 @@ public class GarbageGrabber : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && garbageRigidBody) {
             grabbed = false;
             garbageRigidBody.useGravity = true;
+            garbageRigidBody = null;
+            garbageTransform = null;
         }
     }
 
