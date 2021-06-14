@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    const float MAX_TIME = 120;
+    const float MAX_TIME = 60;
     public float timeRemaining;
     [SerializeField] Text timerText;
 
