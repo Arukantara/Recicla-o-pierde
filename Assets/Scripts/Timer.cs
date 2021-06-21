@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
 {
     const float MAX_TIME = 60;
     public float timeRemaining;
+    private bool finished = false;
     [SerializeField] Text timerText;
 
     // Start is called before the first frame update
@@ -23,6 +24,9 @@ public class Timer : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
             DisplayTime(timeRemaining);
+        } else if (!finished) {
+            finished = true;
+            
         }
     }
 
